@@ -1,0 +1,26 @@
+{
+    "name": "json-server-demo",
+    "version": "1.0.0",
+    "description": "demo how to use json-server",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon index.js",
+        "start": "npm run generate-data && node index.js",
+        "generate-data": "node generate_data.js"
+    },
+    "keywords": [
+        "json-server"
+    ],
+    "author": "Helen",
+    "license": "MIT",
+    "dependencies": {
+        "json-server": "^0.17.0",
+        "query-string": "^7.1.1"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^7.3.0",
+        "casual": "^1.6.2",
+        "nodemon": "^2.0.19"
+    }
+}
