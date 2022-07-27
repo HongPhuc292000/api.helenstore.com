@@ -15,12 +15,11 @@
     "author": "Helen",
     "license": "MIT",
     "dependencies": {
+        "@faker-js/faker": "^7.3.0",
         "json-server": "^0.17.0",
         "query-string": "^7.1.1"
     },
     "devDependencies": {
-        "@faker-js/faker": "^7.3.0",
-        "casual": "^1.6.2",
         "nodemon": "^2.0.19"
     }
 }
