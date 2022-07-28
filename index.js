@@ -38,9 +38,10 @@ router.render = (req, res) => {
             size: +queryParams._limit || 10,
             total: totalCountHeader,
         };
-        return result;
+        return res.jsonp(result);
     }
-    return res.locals.data;
+
+    return res.jsonp(res.locals.data);
 };
 
 // Use default router
