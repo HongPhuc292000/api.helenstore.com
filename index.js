@@ -34,13 +34,13 @@ router.render = (req, res) => {
         const queryParams = queryString.parse(req._parsedUrl.query);
         const result = {
             data: res.locals.data,
-            pagination: { page: +queryParams._page || 1, size: +queryParams._limit || 10 },
+            page: +queryParams._page || 1,
+            size: +queryParams._limit || 10,
             total: totalCountHeader,
         };
-        return res.jsonp(result);
+        return result;
     }
-
-    res.jsonp(res.locals.data);
+    return res.locals.data;
 };
 
 // Use default router
