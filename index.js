@@ -50,3 +50,7 @@ server.use('/api', router);
 server.listen(PORT, () => {
     console.log('JSON Server is running');
 });
+
+setInterval(function () {
+    fetch('https://helenstore.herokuapp.com');
+}, 300000);
