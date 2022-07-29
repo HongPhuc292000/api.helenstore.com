@@ -26,16 +26,23 @@ const randomProducts = (categoryLists, n) => {
     } else {
         Array.from(new Array(n)).forEach(() => {
             categoryLists.forEach((item) => {
+                const defaultPrice = parseFloat(faker.commerce.price());
+                const salePercent = faker.mersenne.rand(21, 8);
+                const randomStatus = ['OUTSTOCK', 'INSTOCK'];
                 const product = {
                     id: faker.datatype.uuid(),
                     name: faker.commerce.product(),
-                    color: faker.color.human(),
-                    price: parseFloat(faker.commerce.price()),
+                    defaultPrice,
+                    salePrice: Math.floor((defaultPrice * (100 - salePercent)) / 100),
+                    salePercent,
                     categoryId: item.id,
                     description: faker.commerce.productDescription(),
+                    imageUrl: faker.image.fashion(600, 600),
+                    rating: faker.mersenne.rand(6, 4),
+                    totalRating: faker.mersenne.rand(100, 4),
+                    status: randomStatus[Math.floor(Math.random() * 2)],
                     createAt: Date.now(),
                     updateAt: Date.now(),
-                    imageUrl: faker.image.imageUrl(600, 600),
                 };
                 productLists.push(product);
             });
@@ -48,7 +55,7 @@ const randomProducts = (categoryLists, n) => {
 // IFFE
 const generateData = () => {
     const categoryLists = randomCategories(4);
-    const productLists = randomProducts(categoryLists, 4);
+    const productLists = randomProducts(categoryLists, 5);
 
     const db = {
         categories: categoryLists,

@@ -35,8 +35,8 @@ router.render = (req, res) => {
         const queryParams = queryString.parse(req._parsedUrl.query);
         const result = {
             data: res.locals.data,
-            page: +queryParams._page || 1,
-            size: +queryParams._limit || 10,
+            _page: +queryParams._page || 1,
+            _limit: +queryParams._limit || 10,
             total: totalCountHeader,
         };
         return res.jsonp(result);
@@ -49,9 +49,14 @@ router.render = (req, res) => {
 const PORT = process.env.PORT || 3000;
 server.use('/api', router);
 server.listen(PORT, () => {
-    console.log('JSON Server is running');
+    console.log('🚀 ~ JSON Server is running');
 });
 
-setInterval(function () {
-    axios.get('https://helenstore.herokuapp.com/api/_page=1&_limit=1');
+setInterval(async function () {
+    try {
+        const result = await axios.get('https://helenstore.herokuapp.com/api/_page=1&_limit=1');
+        console.log('🚀 ~ data: ', result);
+    } catch (error) {
+        console.log(error.code);
+    }
 }, 300000);
