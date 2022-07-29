@@ -41,8 +41,6 @@ const randomProducts = (categoryLists, n) => {
                     rating: faker.mersenne.rand(6, 4),
                     totalRating: faker.mersenne.rand(100, 4),
                     status: randomStatus[Math.floor(Math.random() * 2)],
-                    createAt: Date.now(),
-                    updateAt: Date.now(),
                 };
                 productLists.push(product);
             });

@@ -40,9 +40,9 @@ router.render = (req, res) => {
             total: totalCountHeader,
         };
         return res.jsonp(result);
+    } else {
+        return res.jsonp({ data: res.locals.data });
     }
-
-    return res.jsonp(res.locals.data);
 };
 
 // Use default router
