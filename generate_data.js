@@ -37,7 +37,7 @@ const randomProducts = (categoryLists, n) => {
                     salePercent,
                     categoryId: item.id,
                     description: faker.commerce.productDescription(),
-                    imageUrl: faker.image.fashion(600, 600),
+                    imageUrl: faker.image.imageUrl(600, 600),
                     rating: faker.mersenne.rand(6, 4),
                     totalRating: faker.mersenne.rand(100, 4),
                     status: randomStatus[Math.floor(Math.random() * 2)],
