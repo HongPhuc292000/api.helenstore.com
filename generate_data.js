@@ -31,6 +31,7 @@ const randomProducts = (categoryLists, n) => {
                 const randomStatus = ['OUTSTOCK', 'INSTOCK'];
                 const product = {
                     id: faker.datatype.uuid(),
+                    code: faker.random.alpha({ count: 5, casing: 'upper' })
                     name: faker.commerce.product(),
                     defaultPrice,
                     salePrice: Math.floor((defaultPrice * (100 - salePercent)) / 100),
