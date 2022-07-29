@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
@@ -52,5 +53,5 @@ server.listen(PORT, () => {
 });
 
 setInterval(function () {
-    fetch('https://helenstore.herokuapp.com');
+    axios.get('https://helenstore.herokuapp.com/api/_page=1&_limit=1');
 }, 300000);
