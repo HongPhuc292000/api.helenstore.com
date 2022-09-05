@@ -2,7 +2,7 @@ const { faker } = require('@faker-js/faker/locale/vi');
 const fs = require('fs');
 
 const randomCategories = (n) => {
-    let categoryLists = [];
+    let categoryList = [];
     if (n <= 0) {
         return [];
     } else {
@@ -13,14 +13,14 @@ const randomCategories = (n) => {
                 createAt: Date.now(),
                 updateAt: Date.now(),
             };
-            categoryLists.push(category);
+            categoryList.push(category);
         });
     }
-    return categoryLists;
+    return categoryList;
 };
 
 const randomProducts = (categoryLists, n) => {
-    let productLists = [];
+    let productList = [];
     if (n <= 0) {
         return [];
     } else {
@@ -43,22 +43,64 @@ const randomProducts = (categoryLists, n) => {
                     totalRating: faker.mersenne.rand(100, 4),
                     status: randomStatus[Math.floor(Math.random() * 2)],
                 };
-                productLists.push(product);
+                productList.push(product);
             });
         });
     }
 
-    return productLists;
+    return productList;
+};
+
+const randomDepartments = (n) => {
+    let departmentList = [];
+    if (n <= 0) {
+        return [];
+    } else {
+        Array.from(new Array(n)).forEach(() => {
+            const city = faker.address.city();
+            const randomStatus = ['OPENED', 'READY', 'ACTIVE'];
+            const department = {
+                id: faker.datatype.uuid(),
+                name: `SPORTSTORE - ${city}`,
+                address: `${faker.address.buildingNumber()}, ${city}`,
+                mapAddress: 'https://g.page/HUMG1?share',
+                tel: faker.phone.number('+84 #########'),
+                email: `sport${faker.random.numeric(3)}@gmail.com`,
+                status: randomStatus[Math.floor(Math.random() * 3)],
+                open: {
+                    hours: faker.random.numeric(1, {
+                        bannedDigits: ['0', '1', '2', '3', '4', '5', '6', '9'],
+                    }),
+                    minutes:
+                        faker.random.numeric(1, {
+                            bannedDigits: ['6', '7', '8', '9'],
+                        }) + faker.random.numeric(),
+                },
+                closed: {
+                    hours: faker.random.numeric(1, {
+                        bannedDigits: ['0', '1', '2', '3', '4', '5', '6', '9'],
+                    }),
+                    minutes:
+                        faker.random.numeric(1, {
+                            bannedDigits: ['6', '7', '8', '9'],
+                        }) + faker.random.numeric(),
+                },
+            };
+            departmentList.push(department);
+        });
+    }
+    return departmentList;
 };
 
 // IFFE
 const generateData = () => {
-    const categoryLists = randomCategories(4);
-    const productLists = randomProducts(categoryLists, 5);
-
+    const categoryList = randomCategories(4);
+    const productList = randomProducts(categoryList, 5);
+    const departmentList = randomDepartments(6);
     const db = {
-        categories: categoryLists,
-        products: productLists,
+        categories: categoryList,
+        products: productList,
+        departments: departmentList,
         profile: {
             name: 'Helen',
         },
